@@ -2,8 +2,8 @@
 <otrs_package version="1.0">
     <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.33) -->
     <Name>DynamicFieldOTRSAgents</Name>
-    <Version>3.3.1</Version>
-    <Framework>3.3.x</Framework>
+    <Version>3.2.1</Version>
+    <Framework>3.2.x</Framework>
     <Vendor>Perl-Services.de</Vendor>
     <URL>http://www.perl-services.de</URL>
     <Description Lang="de">OTRS-Agenten in einem Dropdown (Dynamisches Feld)</Description>
@@ -12,7 +12,7 @@
     <Filelist>
         <File Permission="644" Location="Custom/Kernel/Modules/AdminDynamicFieldOTRSAgents.pm" />
         <File Permission="644" Location="Custom/Kernel/Output/HTML/Standard/AdminDynamicFieldOTRSAgents.tt" />
-        <File Permission="644" Location="Custom/Kernel/System/DynamicField/Driver/OTRSAgents.pm" />
+        <File Permission="644" Location="Custom/Kernel/System/DynamicField/Backend/OTRSAgents.pm" />
         <File Permission="644" Location="Kernel/Config/Files/DynamicFieldOTRSAgents.xml" />
         <File Permission="644" Location="Kernel/Language/de_DynamicFieldOTRSAgents.pm" />
         <File Permission="644" Location="doc/DynamicFieldOTRSAgents.json" />

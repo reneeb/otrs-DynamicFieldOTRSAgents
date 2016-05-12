@@ -1,5 +1,5 @@
 # --
-# Kernel/System/DynamicField/Driver/OTRSAgents.pm - Delegate for DynamicField OTRSAgents Driver
+# Kernel/System/DynamicField/Backend/OTRSAgents.pm - Delegate for DynamicField OTRSAgents Backend
 # Copyright (C) 2016 Perl-Services.de, http://perl-services.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -7,25 +7,24 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::System::DynamicField::Driver::OTRSAgents;
+package Kernel::System::DynamicField::Backend::OTRSAgents;
 
 use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::System::DynamicFieldValue;
-use Kernel::System::Ticket::ColumnFilter;
 
-use base qw(Kernel::System::DynamicField::Driver::BaseSelect);
+use base qw(Kernel::System::DynamicField::Backend::Dropdown);
 
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::OTRSAgents
+Kernel::System::DynamicField::Backend::OTRSAgents
 
 =head1 SYNOPSIS
 
-DynamicFields OTRSAgents Driver delegate
+DynamicFields OTRSAgents Backend delegate
 
 =head1 PUBLIC INTERFACE
 
@@ -57,55 +56,6 @@ sub new {
 
     # create additional objects
     $Self->{DynamicFieldValueObject} = Kernel::System::DynamicFieldValue->new( %{$Self} );
-    $Self->{ColumnFilterObject}      = Kernel::System::Ticket::ColumnFilter->new( %{$Self} );
-
-    # set field behaviors
-    $Self->{Behaviors} = {
-        'IsACLReducible'               => 1,
-        'IsNotificationEventCondition' => 1,
-        'IsSortable'                   => 1,
-        'IsFiltrable'                  => 1,
-        'IsStatsCondition'             => 1,
-        'IsCustomerInterfaceCapable'   => 1,
-    };
-
-    # get the Dynamic Field Backend custom extensions
-    my $DynamicFieldDriverExtensions
-        = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Extension::Driver::OTRSAgents');
-
-    EXTENSION:
-    for my $ExtensionKey ( sort keys %{$DynamicFieldDriverExtensions} ) {
-
-        # skip invalid extensions
-        next EXTENSION if !IsHashRefWithData( $DynamicFieldDriverExtensions->{$ExtensionKey} );
-
-        # create a extension config shortcut
-        my $Extension = $DynamicFieldDriverExtensions->{$ExtensionKey};
-
-        # check if extension has a new module
-        if ( $Extension->{Module} ) {
-
-            # check if module can be loaded
-            if (
-                !$Kernel::OM->Get('Kernel::System::Main')->RequireBaseClass( $Extension->{Module} )
-                )
-            {
-                die "Can't load dynamic fields backend module"
-                    . " $Extension->{Module}! $@";
-            }
-        }
-
-        # check if extension contains more behabiors
-        if ( IsHashRefWithData( $Extension->{Behaviors} ) ) {
-
-            %{ $Self->{Behaviors} } = (
-                %{ $Self->{Behaviors} },
-                %{ $Extension->{Behaviors} }
-            );
-        }
-    }
-
-    $Self->{CacheType} = 'DynamicFieldValues';
 
     return $Self;
 }
@@ -177,7 +127,7 @@ sub ColumnFilterValuesGet {
 sub PossibleValuesGet {
     my ($Self, %Param) = @_;
 
-    my $UserObject = $Self->{UerObject};
+    my $UserObject = $Self->{UserObject};
 
     my $Config = $Param{DynamicFieldConfig}->{Config} || {};
 
