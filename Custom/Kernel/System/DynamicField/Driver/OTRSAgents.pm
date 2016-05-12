@@ -13,15 +13,11 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
+use Kernel::System::DynamicFieldValue;
+use Kernel::System::Ticket::ColumnFilter;
 
 use base qw(Kernel::System::DynamicField::Driver::BaseSelect);
 
-our @ObjectDependencies = (
-    'Kernel::Config',
-    'Kernel::System::DynamicFieldValue',
-    'Kernel::System::Main',
-    'Kernel::System::User',
-);
 
 =head1 NAME
 
@@ -51,6 +47,17 @@ sub new {
     # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
+
+    # get needed objects
+    for my $Needed (qw(ConfigObject EncodeObject LogObject MainObject DBObject TimeObject UserObject)) {
+        die "Got no $Needed!" if !$Param{$Needed};
+
+        $Self->{$Needed} = $Param{$Needed};
+    }
+
+    # create additional objects
+    $Self->{DynamicFieldValueObject} = Kernel::System::DynamicFieldValue->new( %{$Self} );
+    $Self->{ColumnFilterObject}      = Kernel::System::Ticket::ColumnFilter->new( %{$Self} );
 
     # set field behaviors
     $Self->{Behaviors} = {
@@ -170,7 +177,7 @@ sub ColumnFilterValuesGet {
 sub PossibleValuesGet {
     my ($Self, %Param) = @_;
 
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+    my $UserObject = $Self->{UerObject};
 
     my $Config = $Param{DynamicFieldConfig}->{Config} || {};
 
