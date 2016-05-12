@@ -1,0 +1,24 @@
+=encoding utf-8
+
+=head1 NAME
+
+DynamicFieldOTRSAgents
+
+=head1 DESCRIPTION
+
+This addon allows you to define DynamicFields that lists all (valid) OTRS agents in the dropdown.
+Currently this addon supports only single selects.
+
+=head1 REPOSITORY AND BUGTRACKER
+
+The code repository and a bugtracker can be found at L<http://github.com/reneeb/otrs-DynamicFieldOTRSAgents>.
+
+=head1 SUPPORT
+
+If you need further support, want to pay for a feature or any OTRS services, please drop me a line at
+L<otrs@perl-services.de>.
+
+=head1 AUTHOR
+
+(c) 2016 Renée Bäcker, C<info@perl-services.de>
+
