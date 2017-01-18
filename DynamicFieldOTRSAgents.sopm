@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+    <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.36) -->
+    <Name>DynamicFieldOTRSAgents</Name>
+    <Version>5.0.1</Version>
+    <Framework>5.0.x</Framework>
+    <Vendor>Perl-Services.de</Vendor>
+    <URL>http://www.perl-services.de</URL>
+    <Description Lang="de">OTRS-Agenten in einem Dropdown (Dynamisches Feld)</Description>
+    <Description Lang="en">OTRS agents in a dropdown DynamicField</Description>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Filelist>
+        <File Permission="644" Location="Custom/Kernel/Modules/AdminDynamicFieldOTRSAgents.pm" />
+        <File Permission="644" Location="Custom/Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldOTRSAgents.tt" />
+        <File Permission="644" Location="Custom/Kernel/System/DynamicField/Driver/OTRSAgents.pm" />
+        <File Permission="644" Location="Kernel/Config/Files/DynamicFieldOTRSAgents.xml" />
+        <File Permission="644" Location="Kernel/Language/de_DynamicFieldOTRSAgents.pm" />
+        <File Permission="644" Location="doc/DynamicFieldOTRSAgents.json" />
+        <File Permission="644" Location="doc/en/DynamicFieldOTRSAgents.pod" />
+    </Filelist>
+</otrs_package>
