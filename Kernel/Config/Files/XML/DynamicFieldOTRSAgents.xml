@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Config">
+    <Setting Name="Frontend::Module###AdminDynamicFieldOTRSAgents" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Agents in a Dynamic Field.</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                    <Item Key="Title" Translatable="1">Dynamic Fields Drop-down Backend GUI</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminDynamicFieldOTRSAgents###002-DynamicFieldOTRSAgents" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>TicketChecklist::Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.DynamicField.js</Item>
+                        <Item>Core.Agent.Admin.DynamicFieldDropdown.js</Item>
+                    </Array>
+                </Item>
+                <Item Key="CSS">
+                    <Array>
+                        <CSS>Core.Agent.Admin.DynamicField.css</CSS>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DynamicFields::Driver###OTRSAgents" Required="0" Valid="1">
+        <Description Translatable="1">DynamicField backend registration.</Description>
+        <Navigation>DynamicFields::Driver::Registration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">OTRSAgents</Item>
+                <Item Key="Module">Kernel::System::DynamicField::Driver::OTRSAgents</Item>
+                <Item Key="ConfigDialog">AdminDynamicFieldOTRSAgents</Item>
+            </Hash>
+        </Value>
+    </Setting>
+</otrs_config>
